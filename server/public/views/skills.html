@@ -10,5 +10,12 @@
         <label for="years">Years:</label>
         <input type="number" id="currentYears" name="years" ng-model="currentSkill.years" />
 
-        <button ng-click="submitNewSkill()">Add Skill</button>
+        <button ng-click="submitNewSkill(user_id)">Add Skill</button>
+</section>
+
+<section>
+   <div ng-repeat="skill in skillz">
+     <h4>{{skill.skill}} {{skill.years}}</h4>
+   </div>
+
 </section>

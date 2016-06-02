@@ -3,9 +3,10 @@ var router = express.Router();
 var passport = require('passport');
 var path = require('path');
 var Skill = require('../models/skill');
+var User = require('../models/user');
 
 router.get('/', function (req, res) {
-  Skill.find({}, function (err, skills) {
+  User.find({}, function (err, skills) {
     if (err) {
       res.sendStatus(500);
       return;
@@ -15,16 +16,28 @@ router.get('/', function (req, res) {
   });
 });
 
-router.post('/', function (req, res) {
-  var skill = new Skill(req.body);
-  skill.save(function (err) {
+router.put('/:id', function (req, res) {
+  var id = req.params.id;
+  var skill = req.body; // {content: <some comment>}
+
+  User.findById(id, function (err, user) {
     if (err) {
       res.sendStatus(500);
       return;
     }
 
-    res.sendStatus(201);
+    user.skills.push(skill);
+
+    user.save(function (err) {
+      if (err) {
+        res.sendStatus(500);
+        return;
+      }
+
+      res.sendStatus(204);
+    });
   });
 });
+
 
 module.exports = router;
