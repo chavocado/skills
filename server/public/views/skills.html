@@ -1,6 +1,6 @@
 <div ng-include="'/views/templates/nav.html'"></div>
+<div class="table-container">
 <h3>{{userName}}'s Skills</h3>
-
 <section id="skillSubmission">
       <h4>Submit a skill</h4>
       <form id="skillForm">
@@ -12,10 +12,20 @@
 
         <button ng-click="submitNewSkill(user_id)">Add Skill</button>
 </section>
-
+    <button class="table-container" ng-click="order = '+years'">Sort v</button>
+    <button class="table-container" ng-click="order = '-years'">Sort ^</button>
+</div>
 <section>
-   <div ng-repeat="skill in skillz">
-     <h4>{{skill.skill}} {{skill.years}}</h4>
-   </div>
-
+    <table class="span5 center-table">
+      <thead>
+        <tr>
+          <th ng-click="order = 'skill'">Skill</th>
+          <th>Years</th>
+        </tr>
+      </thead>
+      <tr ng-repeat="skill in skillz | orderBy: order">
+        <td>{{skill.skill}}</td>
+        <td>{{skill.years}}</td>
+      </tr>
+    </table>
 </section>

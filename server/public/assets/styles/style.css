@@ -39,3 +39,10 @@
 .btn-danger{
     margin-left: 10px;
 }
+.table-container{
+  text-align: center;
+}
+.center-table{
+  margin: 0 auto;
+  float: none;
+}
